@@ -1,0 +1,39 @@
+ALGORITHM sol1_sum
+VAR
+   htab : HASH_TABLE<INTEGER,INTEGER>;
+   set1 : ARRAY_OF INTEGER[4];
+   set2 : ARRAY_OF INTEGER[4];
+   sum_dis : INTEGER:=0;
+   sum_com : INTEGER:=0;
+   i,j: INTEGER;
+BEGIN
+   set1:= {3, 7, 1, 9};
+   set2:= {2, 4, 1, 9};
+  
+   FOR (i=0, i<set1.length, i++)
+       htab.insert(set1[i],1);
+   END_FOR
+   FOR (j=0, j<set2.length, j++)
+       IF (htab.lookup(set2[j])) THEN
+
+           htab.insert(set2[j],2);
+
+           sum_com := sum_com + set2[j]*2;
+        ELSE {
+            htab.insert(set2[j],1);
+
+            }
+       END_IF
+   END_FOR
+   
+   FOR (i=0, i<set1.length, i++)
+     FOR (j=0, j<set2.length, j++)
+     
+          sum_dis := sum_dis+set1[i]+ set2[j]; 
+      END_FOR
+    END_FOR
+
+   
+    Write('Sum of all distinct elements', sum_dis);
+ Write('Sum of overlapping elements: ', sum_com);
+END

@@ -1,0 +1,46 @@
+ALGORITHM sol2_SUM
+VAR
+    set1 : ARRAY_OF INTEGER[4];
+    set2 : ARRAY_OF INTEGER[4];
+    sum_dis : INTEGER:=0;
+    sum_com : INTEGER:=0;
+    i,j : INTEGER;
+BEGIN
+   set1:= {3, 7, 1, 9};
+   set2:= {2, 4, 1, 9};
+
+   FOR (i=0, i<set1.length, i++)
+          j:=0;
+        WHILE (set1[i] <> set2[j] and j<set2[j].length) DO
+            j:=j+1;
+        END_WHILE
+         
+        IF (j==set2.length) THEN
+            sum_dis:=sum_dis + set1[i];
+        END_IF
+        
+        IF (set1[i]=set2[j]) THEN
+           sum_com:=sum_com +set1[i]*2
+        END_IF
+
+   END_FOR
+
+   FOR (i=0, i<set2.length, i++)
+          j:=0;
+        WHILE (set2[i]<>set1[j] and j<set1[j].length) DO
+            j:=j+1;
+        END_WHILE
+
+        IF (j==set1.length) THEN
+            sum_dis:= sum_dis + set2[i];
+        END_IF
+
+        IF (set1[i]=set2[j]) THEN
+            sum_com:=sum_com + set2[i]*2
+        END_IF 
+
+    END_FOR
+
+    Write('Sum of all distinct elements', sum_dis);
+     Write('Sum of overlapping elements: ', sum_com);
+END
